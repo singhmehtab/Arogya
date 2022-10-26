@@ -1,7 +1,6 @@
 package com.spm.arogya.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.spm.arogya.model.enums.Gender;
 import lombok.Builder;
 
 /**

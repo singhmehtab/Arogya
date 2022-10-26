@@ -36,6 +36,10 @@ public class PatientServiceImpl implements IPatientService {
         else if(Objects.isNull(patientRegistrationRequestDto.getGender())) throw new PatientRegistrationException("Gender is Required");
         else if(Objects.isNull(patientRegistrationRequestDto.getLastName())) throw new PatientRegistrationException("Last name is Required");
 
+        if(Objects.nonNull(patientRepository.findFirstByAgeAndPhoneNumberAndGender(patientRegistrationRequestDto.getAge(), patientRegistrationRequestDto.getPhoneNumber(), Gender.getGender(patientRegistrationRequestDto.getGender())))){
+            throw new PatientRegistrationException("Patient with same age, phone number and gender already exists");
+        }
+
         Patient patient = Patient.builder()
                 .firstName(patientRegistrationRequestDto.getFirstName())
                 .middleName(patientRegistrationRequestDto.getMiddleName())

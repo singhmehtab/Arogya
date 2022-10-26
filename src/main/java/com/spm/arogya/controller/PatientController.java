@@ -6,7 +6,6 @@ import com.spm.arogya.dto.PatientRegistrationResponseDto;
 import com.spm.arogya.dto.ResponseDto;
 import com.spm.arogya.exception.PatientRegistrationException;
 import com.spm.arogya.model.Patient;
-import com.spm.arogya.model.enums.Gender;
 import com.spm.arogya.service.IPatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +22,7 @@ import java.util.Collections;
 @RequestMapping(UriConstants.BASE_URL)
 public class PatientController {
 
-    private IPatientService iPatientService;
+    private final IPatientService iPatientService;
 
     /**
      * Instantiates a new Patient controller.
