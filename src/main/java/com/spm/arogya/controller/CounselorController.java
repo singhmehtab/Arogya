@@ -8,6 +8,7 @@ import com.spm.arogya.exception.CounselorRegistrationException;
 import com.spm.arogya.model.Counselor;
 import com.spm.arogya.service.ICounselorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +20,7 @@ import java.util.Collections;
  * The type Counselor controller.
  */
 @RestController
+@CrossOrigin
 @RequestMapping(UriConstants.BASE_URL)
 public class CounselorController {
 
