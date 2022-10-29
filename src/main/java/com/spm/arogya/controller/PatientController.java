@@ -40,7 +40,7 @@ public class PatientController {
      * @param patientRegistrationRequestDto the patient registration request dto
      * @return the response dto
      */
-    @RequestMapping(method = RequestMethod.POST, value = UriConstants.REGISTER_USER)
+    @RequestMapping(method = RequestMethod.POST, value = UriConstants.REGISTER_PATIENT)
     public ResponseDto<PatientRegistrationResponseDto> registerPatient(@RequestBody PatientRegistrationRequestDto patientRegistrationRequestDto){
         Patient patient;
         try{
