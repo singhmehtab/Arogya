@@ -1,8 +1,8 @@
 package com.spm.arogya.controller;
 
 import com.spm.arogya.constants.UriConstants;
-import com.spm.arogya.dto.PatientRegistrationRequestDto;
-import com.spm.arogya.dto.PatientRegistrationResponseDto;
+import com.spm.arogya.dto.Patient.PatientRegistrationRequestDto;
+import com.spm.arogya.dto.Patient.PatientRegistrationResponseDto;
 import com.spm.arogya.dto.ResponseDto;
 import com.spm.arogya.exception.PatientRegistrationException;
 import com.spm.arogya.model.Patient;
