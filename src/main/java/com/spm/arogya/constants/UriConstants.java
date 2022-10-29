@@ -19,4 +19,10 @@ public class UriConstants {
      * The constant LOGIN_USER.
      */
     public static final String LOGIN_USER="login";
+    public static final String REGISTER_PATIENT = "register_patient";
+
+    /**
+     * The constant REGISTER_COUNSELOR.
+     */
+    public static final String REGISTER_COUNSELOR = "register_counselor";
 }

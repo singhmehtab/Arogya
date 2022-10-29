@@ -11,15 +11,15 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * The type Patient.
+ * The type Counselor.
  */
 @Entity
-@Table(name = "patients")
+@Table(name = "counselors")
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Patient extends BaseModel{
+public class Counselor extends BaseModel {
 
     @Column(name = "first_name")
     private String firstName;
@@ -44,5 +44,8 @@ public class Patient extends BaseModel{
 
     @Column(name = "password", nullable = false)
     private String password;
+
+    @Column(name = "registration_number", nullable = false)
+    private String registrationNumber;
 
 }

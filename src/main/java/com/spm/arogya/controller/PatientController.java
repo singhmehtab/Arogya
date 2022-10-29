@@ -1,30 +1,31 @@
 package com.spm.arogya.controller;
 
 import com.spm.arogya.constants.UriConstants;
-import com.spm.arogya.dto.LoginResponse;
 import com.spm.arogya.dto.Patient.PatientRegistrationRequestDto;
 import com.spm.arogya.dto.Patient.PatientRegistrationResponseDto;
 import com.spm.arogya.dto.ResponseDto;
-import com.spm.arogya.exception.LoginException;
 import com.spm.arogya.exception.PatientRegistrationException;
 import com.spm.arogya.model.Patient;
 import com.spm.arogya.service.IPatientService;
-import com.spm.arogya.service.impl.LoginServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.Collections;
 
 /**
  * The type Patient controller.
  */
 @RestController
+@CrossOrigin
 @RequestMapping(UriConstants.BASE_URL)
 public class PatientController {
 
     private final IPatientService iPatientService;
+
     /**
      * Instantiates a new Patient controller.
      *
@@ -41,7 +42,7 @@ public class PatientController {
      * @param patientRegistrationRequestDto the patient registration request dto
      * @return the response dto
      */
-    @RequestMapping(method = RequestMethod.POST, value = UriConstants.REGISTER_USER)
+    @RequestMapping(method = RequestMethod.POST, value = UriConstants.REGISTER_PATIENT)
     public ResponseDto<PatientRegistrationResponseDto> registerPatient(@RequestBody PatientRegistrationRequestDto patientRegistrationRequestDto){
         Patient patient;
         try{
@@ -64,6 +65,5 @@ public class PatientController {
                         .build()
         );
     }
-
 
 }

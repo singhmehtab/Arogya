@@ -1,4 +1,4 @@
-package com.spm.arogya.dto.Patient;
+package com.spm.arogya.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,7 +13,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PatientRegistrationRequestDto {
+public class CounselorRegistrationRequestDto {
 
     @JsonProperty("first_name")
     private String firstName;
@@ -38,5 +38,8 @@ public class PatientRegistrationRequestDto {
 
     @JsonProperty("password")
     private String password;
+
+    @JsonProperty("registration_number")
+    private String registrationNumber;
 
 }
