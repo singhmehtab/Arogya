@@ -2,6 +2,7 @@ package com.spm.arogya.service;
 
 import com.spm.arogya.dto.LoginResponse;
 import com.spm.arogya.dto.Patient.PatientRegistrationRequestDto;
+import com.spm.arogya.exception.LoginException;
 import com.spm.arogya.exception.PatientRegistrationException;
 import com.spm.arogya.model.Patient;
 
@@ -19,5 +20,5 @@ public interface IPatientService {
      */
     Patient savePatient(PatientRegistrationRequestDto patientRegistrationRequestDto) throws PatientRegistrationException;
 
-    LoginResponse getPatientLoginDetails(String email, String password);
+    LoginResponse getLoginDetails(String email, String password) throws LoginException;
 }

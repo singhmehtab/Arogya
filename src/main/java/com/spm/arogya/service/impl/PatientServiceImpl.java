@@ -2,6 +2,7 @@ package com.spm.arogya.service.impl;
 
 import com.spm.arogya.dto.LoginResponse;
 import com.spm.arogya.dto.Patient.PatientRegistrationRequestDto;
+import com.spm.arogya.exception.LoginException;
 import com.spm.arogya.exception.PatientRegistrationException;
 import com.spm.arogya.model.Patient;
 import com.spm.arogya.model.enums.Gender;
@@ -16,7 +17,7 @@ import java.util.Objects;
  * The type Patient service.
  */
 @Service
-public class PatientServiceImpl implements IPatientService {
+public class PatientServiceImpl extends  UserLogin implements IPatientService {
 
     private PatientRepository patientRepository;
 
@@ -60,9 +61,16 @@ public class PatientServiceImpl implements IPatientService {
         return patient;
     }
 
-    @Override
-    public LoginResponse getPatientLoginDetails(String email, String password) {
-        return null;
+    public  LoginResponse getLoginDetails(String email, String password) throws LoginException {
+        LoginResponse loginResponse=new LoginResponse();
+        Patient patient=patientRepository.findFirstByEmailAddressAndPassword(email, password);
+        if(patient==null){
+            loginResponse.setLogged(false);
+            return loginResponse;
+        }
+        loginResponse.setLogged(true);
+        loginResponse.setName(patient.getFirstName());
+        return loginResponse;
     }
 
 

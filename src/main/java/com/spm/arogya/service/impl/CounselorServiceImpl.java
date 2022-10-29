@@ -1,7 +1,9 @@
 package com.spm.arogya.service.impl;
 
 import com.spm.arogya.dto.CounselorRegistrationRequestDto;
+import com.spm.arogya.dto.LoginResponse;
 import com.spm.arogya.exception.CounselorRegistrationException;
+import com.spm.arogya.exception.LoginException;
 import com.spm.arogya.model.Counselor;
 import com.spm.arogya.model.enums.Gender;
 import com.spm.arogya.repository.CounselorRepository;
@@ -15,7 +17,7 @@ import java.util.Objects;
  * The type Counselor service.
  */
 @Service
-public class CounselorServiceImpl implements ICounselorService {
+public class CounselorServiceImpl   extends UserLogin implements ICounselorService {
 
     private CounselorRepository counselorRepository;
 
@@ -59,5 +61,9 @@ public class CounselorServiceImpl implements ICounselorService {
         counselorRepository.save(counselor);
         return counselor;
     }
+    public  LoginResponse getLoginDetails(String email, String password) throws LoginException{
+        return null;
+    }
+
 
 }

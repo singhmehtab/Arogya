@@ -4,10 +4,10 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum UserType {
-    PATIENT("patient"),
-    CONSULTANT("consultant"),
-    DOCTOR("doctor"),
-    ADMIN("admin");
+    PATIENT("PATIENT"),
+    CONSULTANT("CONSULTANT"),
+    DOCTOR("DOCTOR"),
+    ADMIN("ADMIN");
 
     private String userType;
 }
