@@ -35,9 +35,14 @@ public class PatientServiceImpl implements IPatientService {
         if(Objects.isNull(patientRegistrationRequestDto.getAge())) throw new PatientRegistrationException("Age is Required");
         else if(Objects.isNull(patientRegistrationRequestDto.getGender())) throw new PatientRegistrationException("Gender is Required");
         else if(Objects.isNull(patientRegistrationRequestDto.getLastName())) throw new PatientRegistrationException("Last name is Required");
+        else if (Objects.isNull(patientRegistrationRequestDto.getEmailAddress())) throw new PatientRegistrationException("Email Address is required");
+        else if(Objects.isNull(patientRegistrationRequestDto.getPassword())) throw new PatientRegistrationException("Password is required");
 
         if(Objects.nonNull(patientRepository.findFirstByAgeAndPhoneNumberAndGender(patientRegistrationRequestDto.getAge(), patientRegistrationRequestDto.getPhoneNumber(), Gender.getGender(patientRegistrationRequestDto.getGender())))){
             throw new PatientRegistrationException("Patient with same age, phone number and gender already exists");
+        }
+        if(Objects.nonNull(patientRepository.findFirstByEmailAddress(patientRegistrationRequestDto.getEmailAddress()))){
+            throw new PatientRegistrationException("Patient with same email address already exists");
         }
 
         Patient patient = Patient.builder()
@@ -48,6 +53,7 @@ public class PatientServiceImpl implements IPatientService {
                 .emailAddress(patientRegistrationRequestDto.getEmailAddress())
                 .gender(Gender.getGender(patientRegistrationRequestDto.getGender()))
                 .phoneNumber(patientRegistrationRequestDto.getPhoneNumber())
+                .password(patientRegistrationRequestDto.getPassword())
                 .build();
         patientRepository.save(patient);
         return patient;
