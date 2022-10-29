@@ -13,5 +13,10 @@ public class UriConstants {
     /**
      * The constant REGISTER_USER.
      */
-    public static final String REGISTER_USER = "register_user";
+    public static final String REGISTER_USER = "signup";
+
+    /**
+     * The constant LOGIN_USER.
+     */
+    public static final String LOGIN_USER="login";
 }

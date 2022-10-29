@@ -1,4 +1,4 @@
-package com.spm.arogya.dto;
+package com.spm.arogya.dto.Patient;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

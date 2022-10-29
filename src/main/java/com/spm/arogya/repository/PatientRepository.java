@@ -10,5 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface PatientRepository extends JpaRepository<Patient, Integer> {
 
     Patient findFirstByAgeAndPhoneNumberAndGender(Integer age, String phoneNumber, Gender gender);
+    Patient findFirstByEmailAndPassword(String email, String password);
 
 }
