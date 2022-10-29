@@ -11,4 +11,6 @@ public interface PatientRepository extends JpaRepository<Patient, Integer> {
 
     Patient findFirstByAgeAndPhoneNumberAndGender(Integer age, String phoneNumber, Gender gender);
 
+    Patient findFirstByEmailAddress(String emailAddress);
+
 }

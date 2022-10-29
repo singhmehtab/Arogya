@@ -42,4 +42,7 @@ public class Patient extends BaseModel{
     @Column(name = "age", nullable = false)
     private Integer age;
 
+    @Column(name = "password", nullable = false)
+    private String password;
+
 }

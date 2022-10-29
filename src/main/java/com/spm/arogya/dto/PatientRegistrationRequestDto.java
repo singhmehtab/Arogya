@@ -36,4 +36,7 @@ public class PatientRegistrationRequestDto {
     @JsonProperty("age")
     private Integer age;
 
+    @JsonProperty("password")
+    private String password;
+
 }
