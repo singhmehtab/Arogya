@@ -5,6 +5,7 @@ import com.spm.arogya.dto.LoginResponse;
 import com.spm.arogya.exception.CounselorRegistrationException;
 import com.spm.arogya.exception.LoginException;
 import com.spm.arogya.model.Counselor;
+import com.spm.arogya.model.Patient;
 import com.spm.arogya.model.enums.Gender;
 import com.spm.arogya.repository.CounselorRepository;
 import com.spm.arogya.service.ICounselorService;
@@ -62,7 +63,21 @@ public class CounselorServiceImpl   extends UserLogin implements ICounselorServi
         return counselor;
     }
     public  LoginResponse getLoginDetails(String email, String password) throws LoginException{
-        return null;
+        LoginResponse loginResponse=new LoginResponse();
+        Counselor counselor=counselorRepository.findFirstByEmailAddressAndPassword(email, password);
+        if(counselor==null){
+            loginResponse.setLogged(false);
+            return loginResponse;
+        }
+        loginResponse.setLogged(true);
+        loginResponse.setAge(counselor.getAge());
+        loginResponse.setGender(counselor.getGender());
+        loginResponse.setFirstName(counselor.getFirstName());
+        loginResponse.setMiddleName(counselor.getMiddleName());
+        loginResponse.setLastName(counselor.getLastName());
+        loginResponse.setPhoneNumber(counselor.getPhoneNumber());
+        loginResponse.setEmailAddress(counselor.getEmailAddress());
+        return loginResponse;
     }
 
 

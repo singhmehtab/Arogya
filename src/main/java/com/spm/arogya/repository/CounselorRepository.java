@@ -1,6 +1,7 @@
 package com.spm.arogya.repository;
 
 import com.spm.arogya.model.Counselor;
+import com.spm.arogya.model.Patient;
 import com.spm.arogya.model.enums.Gender;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -18,6 +19,7 @@ public interface CounselorRepository extends JpaRepository<Counselor, Integer> {
      * @return the patient
      */
     Counselor findFirstByAgeAndPhoneNumberAndGender(Integer age, String phoneNumber, Gender gender);
+    Counselor findFirstByEmailAddressAndPassword(String email, String password);
 
     /**
      * Find first by email address patient.
