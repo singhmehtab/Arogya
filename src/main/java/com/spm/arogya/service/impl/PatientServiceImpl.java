@@ -69,7 +69,13 @@ public class PatientServiceImpl extends  UserLogin implements IPatientService {
             return loginResponse;
         }
         loginResponse.setLogged(true);
-        loginResponse.setName(patient.getFirstName());
+        loginResponse.setAge(patient.getAge());
+        loginResponse.setGender(patient.getGender());
+        loginResponse.setFirstName(patient.getFirstName());
+        loginResponse.setMiddleName(patient.getMiddleName());
+        loginResponse.setLastName(patient.getLastName());
+        loginResponse.setPhoneNumber(patient.getPhoneNumber());
+        loginResponse.setEmailAddress(patient.getEmailAddress());
         return loginResponse;
     }
 

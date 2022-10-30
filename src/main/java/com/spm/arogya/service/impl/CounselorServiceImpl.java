@@ -70,8 +70,15 @@ public class CounselorServiceImpl   extends UserLogin implements ICounselorServi
             return loginResponse;
         }
         loginResponse.setLogged(true);
-        loginResponse.setName(counselor.getFirstName());
-        return loginResponse;    }
+        loginResponse.setAge(counselor.getAge());
+        loginResponse.setGender(counselor.getGender());
+        loginResponse.setFirstName(counselor.getFirstName());
+        loginResponse.setMiddleName(counselor.getMiddleName());
+        loginResponse.setLastName(counselor.getLastName());
+        loginResponse.setPhoneNumber(counselor.getPhoneNumber());
+        loginResponse.setEmailAddress(counselor.getEmailAddress());
+        return loginResponse;
+    }
 
 
 }
