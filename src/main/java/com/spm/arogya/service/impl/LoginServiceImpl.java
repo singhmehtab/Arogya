@@ -24,7 +24,7 @@ public class LoginServiceImpl implements ILoginService {
         this.iPatientService=iPatientService;
         this.iCounselorService=iCounselorService;
         this.hsmap.put(UserType.PATIENT, (UserLogin) iPatientService);
-        this.hsmap.put(UserType.CONSULTANT, (UserLogin) iCounselorService);
+        this.hsmap.put(UserType.COUNSELOR, (UserLogin) iCounselorService);
     }
 
     @Override
