@@ -7,6 +7,7 @@ import com.spm.arogya.dto.ResponseDto;
 import com.spm.arogya.exception.PatientRegistrationException;
 import com.spm.arogya.model.Patient;
 import com.spm.arogya.service.IPatientService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +22,7 @@ import java.util.Collections;
  */
 @RestController
 @CrossOrigin
+@Slf4j
 @RequestMapping(UriConstants.BASE_URL)
 public class PatientController {
 
@@ -51,6 +53,7 @@ public class PatientController {
             return new ResponseDto<>(Collections.singletonList(e.getMessage()));
         }
         catch (Exception e){
+            log.error("Error occurred :: " , e);
             return new ResponseDto<>(Collections.singletonList("Some Error Occurred"));
         }
         return new ResponseDto<>(
