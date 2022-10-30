@@ -29,6 +29,6 @@ public class LoginServiceImpl implements ILoginService {
 
     @Override
     public LoginResponse getLoginDetails(String email, String password, String userType) throws LoginException {
-        return hsmap.get(UserType.valueOf(userType)).getLoginDetails(email, password);
+        return hsmap.get(UserType.getUserType(userType)).getLoginDetails(email, password);
     }
 }
