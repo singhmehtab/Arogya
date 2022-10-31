@@ -7,6 +7,7 @@ import com.spm.arogya.repository.CounselorRepository;
 import com.spm.arogya.repository.PatientRepository;
 import com.spm.arogya.service.ICounselorService;
 import com.spm.arogya.service.ILoginService;
+import com.spm.arogya.service.IManagerService;
 import com.spm.arogya.service.IPatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,13 +19,16 @@ public class LoginServiceImpl implements ILoginService {
 
     private IPatientService iPatientService;
     private ICounselorService iCounselorService;
+    private IManagerService iManagerService;
     private HashMap<UserType, UserLogin> hsmap = new HashMap<>();
     @Autowired
-    public LoginServiceImpl(IPatientService iPatientService, ICounselorService iCounselorService){
+    public LoginServiceImpl(IPatientService iPatientService, ICounselorService iCounselorService, IManagerService iManagerService){
         this.iPatientService=iPatientService;
         this.iCounselorService=iCounselorService;
+        this.iManagerService = iManagerService;
         this.hsmap.put(UserType.PATIENT, (UserLogin) iPatientService);
         this.hsmap.put(UserType.COUNSELOR, (UserLogin) iCounselorService);
+        this.hsmap.put(UserType.MANAGER, (UserLogin) iManagerService);
     }
 
     @Override

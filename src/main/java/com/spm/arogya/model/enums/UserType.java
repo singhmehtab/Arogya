@@ -9,7 +9,7 @@ public enum UserType {
     PATIENT("patient"),
     COUNSELOR("counselor"),
     DOCTOR("doctor"),
-    ADMIN("admin");
+    MANAGER("manager");
 
     private String userTypeDisplay;
 
