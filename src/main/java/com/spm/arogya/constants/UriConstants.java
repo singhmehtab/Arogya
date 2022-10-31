@@ -20,4 +20,6 @@ public class UriConstants {
      * The constant REGISTER_COUNSELOR.
      */
     public static final String REGISTER_COUNSELOR = "register_counselor";
+
+    public static final String REGISTER_MANAGER = "register_manager";
 }
