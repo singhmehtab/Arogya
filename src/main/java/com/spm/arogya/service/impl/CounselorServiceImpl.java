@@ -35,15 +35,9 @@ public class CounselorServiceImpl   extends UserLogin implements ICounselorServi
     @Override
     public Counselor saveCounselor(CounselorRegistrationRequestDto counselorRegistrationRequestDto) throws CounselorRegistrationException {
 
-        if(Objects.isNull(counselorRegistrationRequestDto.getAge())) throw new CounselorRegistrationException("Age is Required");
-        else if(Objects.isNull(counselorRegistrationRequestDto.getGender())) throw new CounselorRegistrationException("Gender is Required");
-        else if(Objects.isNull(counselorRegistrationRequestDto.getLastName())) throw new CounselorRegistrationException("Last name is Required");
-        else if (Objects.isNull(counselorRegistrationRequestDto.getEmailAddress())) throw new CounselorRegistrationException("Email Address is required");
+        if (Objects.isNull(counselorRegistrationRequestDto.getEmailAddress())) throw new CounselorRegistrationException("Email Address is required");
         else if(Objects.isNull(counselorRegistrationRequestDto.getPassword())) throw new CounselorRegistrationException("Password is required");
 
-        if(Objects.nonNull(counselorRepository.findFirstByAgeAndPhoneNumberAndGender(counselorRegistrationRequestDto.getAge(), counselorRegistrationRequestDto.getPhoneNumber(), Gender.getGender(counselorRegistrationRequestDto.getGender())))){
-            throw new CounselorRegistrationException("Counselor with same age, phone number and gender already exists");
-        }
         if(Objects.nonNull(counselorRepository.findFirstByEmailAddress(counselorRegistrationRequestDto.getEmailAddress()))){
             throw new CounselorRegistrationException("Counselor with same email address already exists");
         }

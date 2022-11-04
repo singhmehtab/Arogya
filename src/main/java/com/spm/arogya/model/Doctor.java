@@ -8,21 +8,18 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.List;
 
 /**
- * The type Patient.
+ * The type Counselor.
  */
 @Entity
-@Table(name = "patients")
+@Table(name = "doctors")
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Patient extends BaseModel{
+public class Doctor extends BaseModel {
 
     @Column(name = "first_name")
     private String firstName;
@@ -48,7 +45,7 @@ public class Patient extends BaseModel{
     @Column(name = "password", nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
-    private List<Appointment> appointmentList;
+    @Column(name = "registration_number", nullable = false)
+    private String registrationNumber;
 
 }
