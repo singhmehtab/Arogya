@@ -17,6 +17,10 @@ public class UriConstants {
     public static final String REGISTER_PATIENT = "register_patient";
 
     public static final String GET_QUESTIONS = "questions";
+    public static final String REGISTER_APPOINTMENT = "register_appointment";
+
+    public static final String GET_APPOINTMENTS = "get_appointments";
+
 
     /**
      * The constant REGISTER_COUNSELOR.

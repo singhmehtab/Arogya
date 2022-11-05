@@ -3,6 +3,7 @@ package com.spm.arogya.controller;
 import com.spm.arogya.constants.UriConstants;
 import com.spm.arogya.dto.ResponseDto;
 import com.spm.arogya.model.Questions;
+import com.spm.arogya.service.IAppointmentService;
 import com.spm.arogya.service.ISelfAssessmentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

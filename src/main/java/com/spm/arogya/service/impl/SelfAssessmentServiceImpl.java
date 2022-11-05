@@ -6,8 +6,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SelfAssessmentServiceImpl implements ISelfAssessmentService {
+
     @Override
     public Questions getQuestionsList() {
         return Questions.getListOfQuestions();
     }
+
+
 }

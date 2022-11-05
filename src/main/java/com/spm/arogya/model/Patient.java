@@ -1,5 +1,6 @@
 package com.spm.arogya.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.spm.arogya.model.enums.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -48,6 +49,7 @@ public class Patient extends BaseModel{
     @Column(name = "password", nullable = false)
     private String password;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
     private List<Appointment> appointmentList;
 

@@ -21,4 +21,6 @@ public interface IPatientService {
     Patient savePatient(PatientRegistrationRequestDto patientRegistrationRequestDto) throws PatientRegistrationException;
 
     LoginResponse getLoginDetails(String email, String password) throws LoginException;
+
+    Patient findByEmailId(String emailId);
 }
