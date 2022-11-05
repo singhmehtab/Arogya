@@ -2,11 +2,13 @@ package com.spm.arogya.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.spm.arogya.model.enums.ProblemFrequency;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -16,6 +18,9 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @Getter
+@Setter
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(content = JsonInclude.Include.NON_NULL)
 public class Questions implements Serializable{
 
     private static final String QUESTION_1 = "Over the past 2 weeks, how often have you been bothered by any of the following problems: Little interest or pleasure in doing things?";
@@ -29,6 +34,7 @@ public class Questions implements Serializable{
     private static final String QUESTION_9 = "Over the past 2 weeks, how often have you been bothered by any of the following problems: Thoughts that you would be better off dead or of hurting yourself in some way?";
 
 
+    @JsonProperty("questions_list")
     private List<Pair> pairList;
 
 
@@ -37,10 +43,13 @@ public class Questions implements Serializable{
     @JsonInclude(content = JsonInclude.Include.NON_NULL)
     @Getter
     @Builder
+    @Setter
     static class Pair implements Serializable {
 
+        @JsonProperty("question")
         private String question;
 
+        @JsonProperty("problem_frequency")
         private ProblemFrequency problemFrequency;
 
         public Pair(String question){

@@ -73,5 +73,10 @@ public class PatientServiceImpl extends  UserLogin implements IPatientService {
         return loginResponse;
     }
 
+    @Override
+    public Patient findByEmailId(String emailId) {
+        return patientRepository.findFirstByEmailAddress(emailId);
+    }
+
 
 }

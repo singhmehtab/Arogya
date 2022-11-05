@@ -1,5 +1,6 @@
 package com.spm.arogya.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,9 +33,11 @@ public class Appointment extends BaseModel{
     @Column(name = "question_answers")
     private Questions questions;
 
+    @JsonIgnore
     @JoinColumn(name = "patient_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Patient patient;
+
 
 
 }
