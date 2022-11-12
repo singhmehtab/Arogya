@@ -1,6 +1,8 @@
 package com.spm.arogya.service.impl;
 
 import com.spm.arogya.dto.AppointmentRequestDto;
+import com.spm.arogya.dto.AppointmentUpdateRequest;
+import com.spm.arogya.dto.AppointmentUpdateResponse;
 import com.spm.arogya.dto.GetAppointmentResponseDto;
 import com.spm.arogya.exception.AppointmentRegistrationException;
 import com.spm.arogya.model.Appointment;
@@ -78,7 +80,23 @@ public class AppointmentServiceImpl implements IAppointmentService {
         return appointmentRepository.findByStatus(0);
     }
 
-
+    @Override
+    public AppointmentUpdateResponse modifyAppointment(AppointmentUpdateRequest appointmentUpdateRequest) throws RuntimeException{
+        AppointmentUpdateResponse appointmentUpdateResponse=new AppointmentUpdateResponse();
+        int appointmentId = appointmentUpdateRequest.getAppointmentId();
+        int status = appointmentUpdateRequest.getStatus();
+        String counsellorId = appointmentUpdateRequest.getCounsellor_id();
+        String doctorId = appointmentUpdateRequest.getDoctorId();
+        Appointment appointment = appointmentRepository.findFirstById(appointmentId);
+        appointment.setStatus(status);
+        if(counsellorId!=null && !counsellorId.isEmpty()){
+            appointment.setCounsellorRegistrationNumber(counsellorId);
+            appointment.setDoctorRegistrationNumber(doctorId);
+        }else if(doctorId!=null && !doctorId.isEmpty()){
+            //write business logic
+        }
+        return appointmentUpdateResponse;
+    }
 
 
 }

@@ -20,6 +20,7 @@ public class UriConstants {
     public static final String REGISTER_APPOINTMENT = "register_appointment";
 
     public static final String GET_APPOINTMENTS = "get_appointments";
+    public static final String MODIFY_APPOINTMENT = "modify_appointment";
 
 
     /**
