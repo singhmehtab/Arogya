@@ -2,6 +2,7 @@ package com.spm.arogya.service;
 
 import com.spm.arogya.dto.Counsellor.CounselorHomepageResponseDto;
 import com.spm.arogya.dto.CounselorRegistrationRequestDto;
+import com.spm.arogya.dto.GetAppointmentResponseDto;
 import com.spm.arogya.exception.CounselorHomepageException;
 import com.spm.arogya.exception.CounselorRegistrationException;
 import com.spm.arogya.model.Counselor;

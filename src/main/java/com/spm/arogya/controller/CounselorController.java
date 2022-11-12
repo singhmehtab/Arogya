@@ -4,6 +4,7 @@ import com.spm.arogya.constants.UriConstants;
 import com.spm.arogya.dto.Counsellor.CounselorHomepageResponseDto;
 import com.spm.arogya.dto.CounselorRegistrationRequestDto;
 import com.spm.arogya.dto.CounselorRegistrationResponseDto;
+import com.spm.arogya.dto.GetAppointmentResponseDto;
 import com.spm.arogya.dto.ResponseDto;
 import com.spm.arogya.exception.CounselorHomepageException;
 import com.spm.arogya.exception.CounselorRegistrationException;

@@ -1,6 +1,7 @@
 package com.spm.arogya.dto.Counsellor;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.spm.arogya.dto.GetAppointmentResponseDto;
 import com.spm.arogya.model.Appointment;
 import lombok.*;
 
@@ -13,11 +14,11 @@ import java.util.List;
 @Setter
 public class CounselorHomepageResponseDto {
     @JsonProperty("pending_appointments")
-    private List<Appointment> pendingAppointments;
+    private List<GetAppointmentResponseDto> pendingAppointments;
 
     @JsonProperty("scheduled_appointments")
-    private List<Appointment>  scheduledAppointments;
+    private List<GetAppointmentResponseDto>  scheduledAppointments;
 
     @JsonProperty("canceled_appointments")
-    private List<Appointment> cancelledAppointments;
+    private List<GetAppointmentResponseDto> cancelledAppointments;
 }

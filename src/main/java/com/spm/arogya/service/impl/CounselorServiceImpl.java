@@ -2,6 +2,7 @@ package com.spm.arogya.service.impl;
 
 import com.spm.arogya.dto.Counsellor.CounselorHomepageResponseDto;
 import com.spm.arogya.dto.CounselorRegistrationRequestDto;
+import com.spm.arogya.dto.GetAppointmentResponseDto;
 import com.spm.arogya.dto.LoginResponse;
 import com.spm.arogya.exception.CounselorHomepageException;
 import com.spm.arogya.exception.CounselorRegistrationException;
@@ -69,12 +70,13 @@ public class CounselorServiceImpl   extends UserLogin implements ICounselorServi
     @Override
     public CounselorHomepageResponseDto getHomePage(String counsellorId) throws CounselorHomepageException{
         try {
-            List<Appointment> pendingAppointments = appointmentRepository.findByStatus(0);
-            List<Appointment> scheduledAppointments = new ArrayList<>();
-            List<Appointment> cancelledAppointments = new ArrayList<>();
+            List<GetAppointmentResponseDto> pendingAppointments = new ArrayList<>();
+            List<GetAppointmentResponseDto> scheduledAppointments = new ArrayList<>();
+            List<GetAppointmentResponseDto> cancelledAppointments = new ArrayList<>();
+            pendingAppointments=transformAppointmentToAppointmentResponseDto(appointmentRepository.findByStatus(0));
             if(counsellorId!=null && !counsellorId.isEmpty()){
-                    scheduledAppointments = appointmentRepository.findByStatusAndCounsellorRegistrationNumber(2, counsellorId);
-                    cancelledAppointments =  appointmentRepository.findByStatusAndCounsellorRegistrationNumber(1, counsellorId);
+                    scheduledAppointments = transformAppointmentToAppointmentResponseDto(appointmentRepository.findByStatusAndCounsellorRegistrationNumber(2, counsellorId));
+                    cancelledAppointments =  transformAppointmentToAppointmentResponseDto(appointmentRepository.findByStatusAndCounsellorRegistrationNumber(1, counsellorId));
             }
             return CounselorHomepageResponseDto.builder()
                     .pendingAppointments(pendingAppointments)
@@ -87,7 +89,21 @@ public class CounselorServiceImpl   extends UserLogin implements ICounselorServi
 
 
     }
-
+    private List<GetAppointmentResponseDto> transformAppointmentToAppointmentResponseDto(List<Appointment> ls){
+        List<GetAppointmentResponseDto> transformedLs=new ArrayList<>();
+        ls.forEach(appointment -> {
+            transformedLs.add(GetAppointmentResponseDto.builder()
+                    .appointmentStartTime(appointment.getAppointmentStartTime())
+                    .appointmentEndTime(appointment.getAppointmentEndTime())
+                    .counsellorRegistrationNumber(appointment.getCounsellorRegistrationNumber())
+                    .doctorRegistrationNumber(appointment.getDoctorRegistrationNumber())
+                    .patient(appointment.getPatient())
+                    .questions(appointment.getQuestions())
+                    .selfAssessment(true)
+                    .build());
+        });
+        return transformedLs;
+    }
     public  LoginResponse getLoginDetails(String email, String password) throws LoginException{
         LoginResponse loginResponse=new LoginResponse();
         Counselor counselor=counselorRepository.findFirstByEmailAddressAndPassword(email, password);
