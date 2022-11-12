@@ -2,9 +2,9 @@ package com.spm.arogya.controller;
 
 import com.spm.arogya.constants.UriConstants;
 import com.spm.arogya.dto.AppointmentRequestDto;
+import com.spm.arogya.dto.GetAppointmentResponseDto;
 import com.spm.arogya.dto.ResponseDto;
 import com.spm.arogya.exception.AppointmentRegistrationException;
-import com.spm.arogya.model.Appointment;
 import com.spm.arogya.service.IAppointmentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +31,7 @@ public class AppointmentController {
         this.iAppointmentService = iAppointmentService;
     }
 
+    @CrossOrigin
     @RequestMapping(method = RequestMethod.POST, value = UriConstants.REGISTER_APPOINTMENT)
     public ResponseDto<String> registerAppointment(@RequestBody AppointmentRequestDto appointmentRegistrationRequestDto){
         try {
@@ -42,8 +43,9 @@ public class AppointmentController {
         return new ResponseDto("Appointment Registered Successfully");
     }
 
+    @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, value = UriConstants.GET_APPOINTMENTS)
-    public ResponseDto<List<Appointment>> getAppointments(@RequestParam(name = "email_address")String emailAddress){
+    public ResponseDto<List<GetAppointmentResponseDto>> getAppointments(@RequestParam(name = "email_address", required = false)String emailAddress){
         try {
             return new ResponseDto<>(iAppointmentService.getAppointments(emailAddress));
         }

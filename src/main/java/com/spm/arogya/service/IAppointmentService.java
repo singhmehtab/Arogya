@@ -1,6 +1,7 @@
 package com.spm.arogya.service;
 
 import com.spm.arogya.dto.AppointmentRequestDto;
+import com.spm.arogya.dto.GetAppointmentResponseDto;
 import com.spm.arogya.exception.AppointmentRegistrationException;
 import com.spm.arogya.model.Appointment;
 
@@ -13,6 +14,6 @@ public interface IAppointmentService {
 
     Appointment saveAppointment(AppointmentRequestDto appointmentRegistrationRequestDto) throws AppointmentRegistrationException;
 
-    List<Appointment> getAppointments(String emailAddress) throws AppointmentRegistrationException;
+    List<GetAppointmentResponseDto> getAppointments(String emailAddress) throws AppointmentRegistrationException;
 
 }
