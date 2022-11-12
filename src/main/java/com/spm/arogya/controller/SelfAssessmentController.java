@@ -25,6 +25,7 @@ public class SelfAssessmentController {
         this.iSelfAssessmentService = iSelfAssessmentService;
     }
 
+    @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, value = UriConstants.GET_QUESTIONS)
     public ResponseDto<Questions> getQuestionsList(){
         return new ResponseDto<>(iSelfAssessmentService.getQuestionsList());

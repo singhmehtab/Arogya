@@ -13,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.Date;
 
 @Table(name = "appointments")
@@ -33,9 +34,24 @@ public class Appointment extends BaseModel{
     @Column(name = "question_answers")
     private Questions questions;
 
+    @Column(name = "counsellor_id")
+    private String counsellorRegistrationNumber;
+
+    @Column(name = "doctor_id")
+    private String doctorRegistrationNumber;
+    //status 0 -> appointment born
+    //status 1 -> rejected by counsellor
+    //status 2 -> scheduled with counsellor
+    //status 3 -> scheduled with doctor
+    //status 4 -> accepted by doctor
+    //status 5 -> rejected by doctor
+    @Column(name = "status")
+    private int status;
+
+
     @JsonIgnore
     @JoinColumn(name = "patient_id", nullable = false)
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Patient patient;
 
 
