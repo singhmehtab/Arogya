@@ -1,10 +1,9 @@
 package com.spm.arogya.controller;
 
 import com.spm.arogya.constants.UriConstants;
-import com.spm.arogya.dto.AppointmentRequestDto;
-import com.spm.arogya.dto.GetAppointmentResponseDto;
-import com.spm.arogya.dto.ResponseDto;
+import com.spm.arogya.dto.*;
 import com.spm.arogya.exception.AppointmentRegistrationException;
+import com.spm.arogya.model.Appointment;
 import com.spm.arogya.service.IAppointmentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +50,17 @@ public class AppointmentController {
         }
         catch (AppointmentRegistrationException e){
             log.error("Appointment Get for email address : " + emailAddress);
+            return new ResponseDto<>(Collections.singletonList(e.getMessage()));
+        }
+    }
+    @CrossOrigin
+    @RequestMapping(method = RequestMethod.PUT, value = UriConstants.MODIFY_APPOINTMENT)
+    public ResponseDto<AppointmentUpdateResponse> modifyAppointment(@RequestBody AppointmentUpdateRequest appointmentUpdateRequest){
+        try {
+            return new ResponseDto<>(iAppointmentService.modifyAppointment(appointmentUpdateRequest));
+        }
+        catch (Exception e){
+            log.error("Modify Appointment failed for :" + appointmentUpdateRequest.toString());
             return new ResponseDto<>(Collections.singletonList(e.getMessage()));
         }
     }
