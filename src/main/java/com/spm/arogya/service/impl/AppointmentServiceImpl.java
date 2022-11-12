@@ -43,6 +43,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
             Appointment appointment = Appointment.builder()
                 .patient(patient)
                 .questions(appointmentRegistrationRequestDto.getQuestions())
+                .status(0)
                 .build();
             appointmentRepository.save(appointment);
             return appointment;
@@ -72,5 +73,12 @@ public class AppointmentServiceImpl implements IAppointmentService {
         });
        return getAppointmentResponseDtos;
     }
+    @Override
+    public List<Appointment> getAppointmentsForCounsellor(){
+        return appointmentRepository.findByStatus(0);
+    }
+
+
+
 
 }

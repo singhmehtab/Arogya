@@ -16,4 +16,6 @@ public interface IAppointmentService {
 
     List<GetAppointmentResponseDto> getAppointments(String emailAddress) throws AppointmentRegistrationException;
 
+    List<Appointment> getAppointmentsForCounsellor();
+
 }

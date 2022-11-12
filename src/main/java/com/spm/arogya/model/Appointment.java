@@ -48,7 +48,6 @@ public class Appointment extends BaseModel{
     @Column(name = "status")
     private int status;
 
-
     @JsonIgnore
     @JoinColumn(name = "patient_id", nullable = false)
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
