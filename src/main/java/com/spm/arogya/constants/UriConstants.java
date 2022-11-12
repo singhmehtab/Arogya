@@ -30,4 +30,6 @@ public class UriConstants {
     public static final String REGISTER_MANAGER = "register_manager";
 
     public static final String REGISTER_DOCTOR = "register_doctor";
+
+    public static final String HOMEPAGE_COUNSELOR = "homepage_counselor";
 }

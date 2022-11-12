@@ -41,6 +41,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
             Appointment appointment = Appointment.builder()
                 .patient(patient)
                 .questions(appointmentRegistrationRequestDto.getQuestions())
+                .status(0)
                 .build();
             appointmentRepository.save(appointment);
             return appointment;
@@ -52,5 +53,12 @@ public class AppointmentServiceImpl implements IAppointmentService {
         if(Objects.isNull(patient)) throw new AppointmentRegistrationException("Please provide a valid email address");
         return appointmentRepository.findByPatient(patient);
     }
+    @Override
+    public List<Appointment> getAppointmentsForCounsellor(){
+        return appointmentRepository.findByStatus(0);
+    }
+
+
+
 
 }

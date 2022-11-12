@@ -1,19 +1,17 @@
 package com.spm.arogya.controller;
 
 import com.spm.arogya.constants.UriConstants;
+import com.spm.arogya.dto.Counsellor.CounselorHomepageResponseDto;
 import com.spm.arogya.dto.CounselorRegistrationRequestDto;
 import com.spm.arogya.dto.CounselorRegistrationResponseDto;
 import com.spm.arogya.dto.ResponseDto;
+import com.spm.arogya.exception.CounselorHomepageException;
 import com.spm.arogya.exception.CounselorRegistrationException;
 import com.spm.arogya.model.Counselor;
 import com.spm.arogya.service.ICounselorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 
@@ -68,6 +66,21 @@ public class CounselorController {
                         .registrationNumber(counselor.getRegistrationNumber())
                         .build()
         );
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = UriConstants.HOMEPAGE_COUNSELOR)
+    public ResponseDto<CounselorHomepageResponseDto> homepageCounselor(@RequestParam(value = "counsellor_id", required = false) String counsellorId){
+        CounselorHomepageResponseDto counselorHomepageResponseDto;
+        try{
+            counselorHomepageResponseDto = iCounselorService.getHomePage(counsellorId);
+            return new ResponseDto<>(counselorHomepageResponseDto);
+        } catch (CounselorHomepageException e) {
+            return new ResponseDto<>(Collections.singletonList(e.getMessage()));
+        }
+        catch (Exception e){
+            log.error("Error occurred ::", e );
+            return new ResponseDto<>(Collections.singletonList("Some Error Occurred"));
+        }
     }
 
 }
