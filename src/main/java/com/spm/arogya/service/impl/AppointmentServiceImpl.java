@@ -52,7 +52,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
     }
 
     @Override
-    public List<GetAppointmentResponseDto> getAppointments(String emailAddress) throws AppointmentRegistrationException {
+    public GetAppointmentResponseDto getAppointments(String emailAddress) throws AppointmentRegistrationException {
         List<Appointment> appointmentList = null;
         if(Objects.isNull(emailAddress) || emailAddress.isEmpty()){
             appointmentList = appointmentRepository.findAllByStatus(0);
@@ -61,19 +61,20 @@ public class AppointmentServiceImpl implements IAppointmentService {
             Patient patient = patientService.findByEmailId(emailAddress);
             appointmentList = appointmentRepository.findByPatient(patient);
         }
-        List<GetAppointmentResponseDto> getAppointmentResponseDtos = new ArrayList<>();
+        List<GetAppointmentResponseDto.AppointmentDetails> appointmentDetails = new ArrayList<>();
         appointmentList.forEach(appointment -> {
-            getAppointmentResponseDtos.add(GetAppointmentResponseDto.builder()
-                            .appointmentStartTime(appointment.getAppointmentStartTime())
-                            .appointmentEndTime(appointment.getAppointmentEndTime())
-                            .counsellorRegistrationNumber(appointment.getCounsellorRegistrationNumber())
-                            .doctorRegistrationNumber(appointment.getDoctorRegistrationNumber())
-                            .patient(appointment.getPatient())
-                            .questions(appointment.getQuestions())
-                            .selfAssessment(true)
-                    .build());
+            GetAppointmentResponseDto.AppointmentDetails details = GetAppointmentResponseDto.AppointmentDetails.builder()
+                    .appointmentStartTime(appointment.getAppointmentStartTime())
+                    .appointmentEndTime(appointment.getAppointmentEndTime())
+                    .counsellorRegistrationNumber(appointment.getCounsellorRegistrationNumber())
+                    .doctorRegistrationNumber(appointment.getDoctorRegistrationNumber())
+                    .patient(appointment.getPatient())
+                    .questions(appointment.getQuestions())
+                    .selfAssessment(true).build();
+            appointmentDetails.add(details);
         });
-       return getAppointmentResponseDtos;
+
+       return GetAppointmentResponseDto.builder().appointmentDetails(appointmentDetails).selfAssessment(true).build();
     }
     @Override
     public List<Appointment> getAppointmentsForCounsellor(){

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
-import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -44,7 +43,7 @@ public class AppointmentController {
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, value = UriConstants.GET_APPOINTMENTS)
-    public ResponseDto<List<GetAppointmentResponseDto>> getAppointments(@RequestParam(name = "email_address", required = false)String emailAddress){
+    public ResponseDto<GetAppointmentResponseDto> getAppointments(@RequestParam(name = "email_address", required = false)String emailAddress){
         try {
             return new ResponseDto<>(iAppointmentService.getAppointments(emailAddress));
         }
