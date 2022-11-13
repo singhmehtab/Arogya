@@ -70,9 +70,9 @@ public class CounselorServiceImpl   extends UserLogin implements ICounselorServi
     @Override
     public CounselorHomepageResponseDto getHomePage(String counsellorId) throws CounselorHomepageException{
         try {
-            List<GetAppointmentResponseDto> pendingAppointments = new ArrayList<>();
-            List<GetAppointmentResponseDto> scheduledAppointments = new ArrayList<>();
-            List<GetAppointmentResponseDto> cancelledAppointments = new ArrayList<>();
+            GetAppointmentResponseDto pendingAppointments = null;
+            GetAppointmentResponseDto scheduledAppointments = null;
+            GetAppointmentResponseDto cancelledAppointments = null;
             pendingAppointments=transformAppointmentToAppointmentResponseDto(appointmentRepository.findByStatus(0));
             if(counsellorId!=null && !counsellorId.isEmpty()){
                     scheduledAppointments = transformAppointmentToAppointmentResponseDto(appointmentRepository.findByStatusAndCounsellorRegistrationNumber(2, counsellorId));
@@ -89,20 +89,21 @@ public class CounselorServiceImpl   extends UserLogin implements ICounselorServi
 
 
     }
-    private List<GetAppointmentResponseDto> transformAppointmentToAppointmentResponseDto(List<Appointment> ls){
-        List<GetAppointmentResponseDto> transformedLs=new ArrayList<>();
+    private GetAppointmentResponseDto transformAppointmentToAppointmentResponseDto(List<Appointment> ls){
+        List<GetAppointmentResponseDto.AppointmentDetails> transformedLs=new ArrayList<>();
         ls.forEach(appointment -> {
-            transformedLs.add(GetAppointmentResponseDto.builder()
+
+            GetAppointmentResponseDto.AppointmentDetails details = GetAppointmentResponseDto.AppointmentDetails.builder()
                     .appointmentStartTime(appointment.getAppointmentStartTime())
                     .appointmentEndTime(appointment.getAppointmentEndTime())
                     .counsellorRegistrationNumber(appointment.getCounsellorRegistrationNumber())
                     .doctorRegistrationNumber(appointment.getDoctorRegistrationNumber())
                     .patient(appointment.getPatient())
                     .questions(appointment.getQuestions())
-                    .selfAssessment(true)
-                    .build());
+                    .selfAssessment(true).build();
+            transformedLs.add(details);
         });
-        return transformedLs;
+        return GetAppointmentResponseDto.builder().appointmentDetails(transformedLs).selfAssessment(true).build();
     }
     public  LoginResponse getLoginDetails(String email, String password) throws LoginException{
         LoginResponse loginResponse=new LoginResponse();

@@ -3,7 +3,6 @@ package com.spm.arogya.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.spm.arogya.model.enums.ProblemFrequency;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -50,7 +49,7 @@ public class Questions implements Serializable{
         private String question;
 
         @JsonProperty("problem_frequency")
-        private ProblemFrequency problemFrequency;
+        private String problemFrequency;
 
         public Pair(String question){
             this.question = question;
