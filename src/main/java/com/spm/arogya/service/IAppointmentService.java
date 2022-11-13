@@ -14,6 +14,6 @@ public interface IAppointmentService {
 
     Appointment saveAppointment(AppointmentRequestDto appointmentRegistrationRequestDto) throws AppointmentRegistrationException;
 
-    List<GetAppointmentResponseDto> getAppointments(String emailAddress) throws AppointmentRegistrationException;
+    GetAppointmentResponseDto getAppointments(String emailAddress) throws AppointmentRegistrationException;
 
 }
