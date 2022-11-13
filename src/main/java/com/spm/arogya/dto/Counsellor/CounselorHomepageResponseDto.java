@@ -14,11 +14,11 @@ import java.util.List;
 @Setter
 public class CounselorHomepageResponseDto {
     @JsonProperty("pending_appointments")
-    private List<GetAppointmentResponseDto> pendingAppointments;
+    private GetAppointmentResponseDto pendingAppointments;
 
     @JsonProperty("scheduled_appointments")
-    private List<GetAppointmentResponseDto>  scheduledAppointments;
+    private GetAppointmentResponseDto  scheduledAppointments;
 
     @JsonProperty("canceled_appointments")
-    private List<GetAppointmentResponseDto> cancelledAppointments;
+    private GetAppointmentResponseDto cancelledAppointments;
 }
