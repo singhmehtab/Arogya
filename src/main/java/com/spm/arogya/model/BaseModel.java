@@ -2,6 +2,7 @@ package com.spm.arogya.model;
 
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import com.vladmihalcea.hibernate.type.json.JsonStringType;
+import lombok.Builder;
 import lombok.Data;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;

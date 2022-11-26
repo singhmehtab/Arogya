@@ -5,6 +5,7 @@ import com.spm.arogya.dto.Patient.PatientRegistrationRequestDto;
 import com.spm.arogya.dto.Patient.PatientRegistrationResponseDto;
 import com.spm.arogya.dto.ResponseDto;
 import com.spm.arogya.exception.PatientRegistrationException;
+import com.spm.arogya.model.Counselor;
 import com.spm.arogya.model.Patient;
 import com.spm.arogya.service.IPatientService;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
+import java.util.List;
 
 /**
  * The type Patient controller.
@@ -67,6 +69,20 @@ public class PatientController {
                         .gender(patient.getGender().getGenderDisplay())
                         .build()
         );
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = UriConstants.GET_PATIENT_LIST)
+    public ResponseDto<List<Patient>> getPatient(){
+
+        List<Patient> list;
+        try{
+            list = iPatientService.getPatientsList();
+        }
+        catch (Exception e){
+            log.error("Error occurred :: " , e);
+            return new ResponseDto<>(Collections.singletonList("Some Error Occurred"));
+        }
+        return new ResponseDto<>(list);
     }
 
 }

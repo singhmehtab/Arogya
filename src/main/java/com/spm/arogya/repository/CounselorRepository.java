@@ -5,6 +5,8 @@ import com.spm.arogya.model.Patient;
 import com.spm.arogya.model.enums.Gender;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 /**
  * The interface Counselor repository.
  */
@@ -28,5 +30,7 @@ public interface CounselorRepository extends JpaRepository<Counselor, Integer> {
      * @return the patient
      */
     Counselor findFirstByEmailAddress(String emailAddress);
+
+    List<Counselor> findAll();
 
 }

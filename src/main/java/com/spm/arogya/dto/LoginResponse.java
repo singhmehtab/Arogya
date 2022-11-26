@@ -12,6 +12,10 @@ import javax.persistence.Column;
 @Setter
 @Builder
 public class LoginResponse {
+
+    @JsonProperty("id")
+    private Integer id;
+
     @JsonProperty("first_name")
     private String firstName;
 
