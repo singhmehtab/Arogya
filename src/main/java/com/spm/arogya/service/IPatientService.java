@@ -27,4 +27,6 @@ public interface IPatientService {
     Patient findByEmailId(String emailId);
 
     List<Patient> getPatientsList();
+
+    void deletePatient(String emailAddress);
 }

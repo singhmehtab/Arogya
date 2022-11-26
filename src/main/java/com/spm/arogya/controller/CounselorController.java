@@ -59,6 +59,7 @@ public class CounselorController {
         }
         return new ResponseDto<>(
                 CounselorRegistrationResponseDto.builder()
+                        .id(counselor.getId())
                         .firstName(counselor.getFirstName())
                         .middleName(counselor.getMiddleName())
                         .lastName(counselor.getLastName())
@@ -98,6 +99,18 @@ public class CounselorController {
             return new ResponseDto<>(Collections.singletonList("Some Error Occurred"));
         }
         return new ResponseDto<>(list);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = UriConstants.DELETE_COUNSELOR)
+    private ResponseDto<String> deleteCounselor(@RequestParam(name = "email_address")String emailAddress){
+        try{
+            iCounselorService.deleteCounselor(emailAddress);
+            return new ResponseDto<>("Record Deleted Successfully");
+        }
+        catch (Exception e){
+            log.error("Error occurred :: " , e);
+            return new ResponseDto<>(Collections.singletonList("Some Error Occurred"));
+        }
     }
 
 }

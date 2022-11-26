@@ -9,6 +9,9 @@ import lombok.Builder;
 @Builder
 public class ManagerRegistrationResponseDto {
 
+    @JsonProperty("id")
+    private Integer id;
+
     @JsonProperty("first_name")
     private String firstName;
 

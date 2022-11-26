@@ -4,13 +4,16 @@ import com.spm.arogya.dto.LoginResponse;
 import com.spm.arogya.dto.Patient.PatientRegistrationRequestDto;
 import com.spm.arogya.exception.LoginException;
 import com.spm.arogya.exception.PatientRegistrationException;
+import com.spm.arogya.model.Appointment;
 import com.spm.arogya.model.Patient;
 import com.spm.arogya.model.enums.Gender;
+import com.spm.arogya.repository.AppointmentRepository;
 import com.spm.arogya.repository.PatientRepository;
 import com.spm.arogya.service.IPatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,14 +25,17 @@ public class PatientServiceImpl extends  UserLogin implements IPatientService {
 
     private PatientRepository patientRepository;
 
+    private AppointmentRepository appointmentRepository;
+
     /**
      * Instantiates a new Patient service.
      *
      * @param patientRepository the patient repository
      */
     @Autowired
-    public PatientServiceImpl(PatientRepository patientRepository){
+    public PatientServiceImpl(PatientRepository patientRepository, AppointmentRepository appointmentRepository){
         this.patientRepository = patientRepository;
+        this.appointmentRepository = appointmentRepository;
     }
 
     @Override
@@ -83,6 +89,14 @@ public class PatientServiceImpl extends  UserLogin implements IPatientService {
     @Override
     public List<Patient> getPatientsList() {
         return patientRepository.findAll();
+    }
+
+    @Override
+    @Transactional
+    public void deletePatient(String emailAddress) {
+        Patient patient = findByEmailId(emailAddress);
+        appointmentRepository.deleteAppointmentByPatient(patient);
+        patientRepository.deleteAllByEmailAddress(emailAddress);
     }
 
 

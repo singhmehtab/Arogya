@@ -6,9 +6,11 @@ import com.spm.arogya.dto.LoginResponse;
 import com.spm.arogya.exception.CounselorRegistrationException;
 import com.spm.arogya.exception.DoctorRegistrationException;
 import com.spm.arogya.exception.LoginException;
+import com.spm.arogya.model.Appointment;
 import com.spm.arogya.model.Counselor;
 import com.spm.arogya.model.Doctor;
 import com.spm.arogya.model.enums.Gender;
+import com.spm.arogya.repository.AppointmentRepository;
 import com.spm.arogya.repository.CounselorRepository;
 import com.spm.arogya.repository.DoctorRepository;
 import com.spm.arogya.service.ICounselorService;
@@ -17,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.print.Doc;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,14 +31,16 @@ public class DoctorServiceImpl extends UserLogin implements IDoctorService {
 
     private DoctorRepository doctorRepository;
 
+    private AppointmentRepository appointmentRepository;
     /**
      * Instantiates a new Patient service.
      *
      * @param doctorRepository the counselor repository
      */
     @Autowired
-    public DoctorServiceImpl(DoctorRepository doctorRepository){
+    public DoctorServiceImpl(DoctorRepository doctorRepository, AppointmentRepository appointmentRepository){
         this.doctorRepository = doctorRepository;
+        this.appointmentRepository = appointmentRepository;
     }
 
     @Override
@@ -84,6 +89,16 @@ public class DoctorServiceImpl extends UserLogin implements IDoctorService {
     @Override
     public List<Doctor> getDoctorsList() {
         return doctorRepository.findAll();
+    }
+
+    @Override
+    @Transactional
+    public void deleteDoctor(String emailAddress) {
+        Doctor doctor = doctorRepository.findFirstByEmailAddress(emailAddress);
+        doctorRepository.deleteAllByEmailAddress(emailAddress);
+        List<Appointment> appointmentList = appointmentRepository.findAllByDoctorRegistrationNumber(doctor.getId().toString());
+        appointmentList.forEach(appointment -> {appointment.setDoctorRegistrationNumber(null);appointment.setStatus(0);});
+        appointmentRepository.saveAll(appointmentList);
     }
 
 

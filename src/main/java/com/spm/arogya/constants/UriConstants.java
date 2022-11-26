@@ -38,5 +38,11 @@ public class UriConstants {
 
     public static final String GET_PATIENT_LIST = "patients";
 
+    public static final String DELETE_PATIENT = "patient";
+
+    public static final String DELETE_COUNSELOR = "counselor";
+
+    public static final String DELETE_DOCTOR = "doctor";
+
     public static final String HOMEPAGE_COUNSELOR = "homepage_counselor";
 }

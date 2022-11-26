@@ -64,6 +64,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
         List<GetAppointmentResponseDto.AppointmentDetails> appointmentDetails = new ArrayList<>();
         appointmentList.forEach(appointment -> {
             GetAppointmentResponseDto.AppointmentDetails details = GetAppointmentResponseDto.AppointmentDetails.builder()
+                    .appointmentId(appointment.getId())
                     .appointmentStartTime(appointment.getAppointmentStartTime())
                     .appointmentEndTime(appointment.getAppointmentEndTime())
                     .counsellorRegistrationNumber(appointment.getCounsellorRegistrationNumber())
@@ -89,15 +90,21 @@ public class AppointmentServiceImpl implements IAppointmentService {
         String counsellorId = appointmentUpdateRequest.getCounsellor_id();
         String doctorId = appointmentUpdateRequest.getDoctorId();
         Appointment appointment = appointmentRepository.findFirstById(appointmentId);
-        if(Objects.nonNull(status))appointment.setStatus(status);
         if(counsellorId!=null && !counsellorId.isEmpty()){
             appointment.setCounsellorRegistrationNumber(counsellorId);
+            appointment.setStatus(2);
         }
         if(doctorId!=null && !doctorId.isEmpty()){
             appointment.setDoctorRegistrationNumber(doctorId);
+            appointment.setStatus(4);
         }
+        if(Objects.nonNull(status))appointment.setStatus(status);
         appointmentRepository.save(appointment);
         return appointmentUpdateResponse;
+    }
+
+    public void deleteAppointments(Patient patient){
+
     }
 
 

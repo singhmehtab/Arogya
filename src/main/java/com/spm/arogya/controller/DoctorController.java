@@ -2,6 +2,7 @@ package com.spm.arogya.controller;
 
 import com.spm.arogya.constants.UriConstants;
 import com.spm.arogya.dto.DoctorRegistrationRequestDto;
+import com.spm.arogya.dto.DoctorRegistrationResponseDto;
 import com.spm.arogya.dto.ResponseDto;
 import com.spm.arogya.exception.DoctorRegistrationException;
 import com.spm.arogya.model.Doctor;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.print.Doc;
@@ -46,7 +48,7 @@ public class DoctorController {
      * @return the response dto
      */
     @RequestMapping(method = RequestMethod.POST, value = UriConstants.REGISTER_DOCTOR)
-    public ResponseDto<DoctorRegistrationRequestDto> registerPatient(@RequestBody DoctorRegistrationRequestDto doctorRegistrationRequestDto){
+    public ResponseDto<DoctorRegistrationResponseDto> registerPatient(@RequestBody DoctorRegistrationRequestDto doctorRegistrationRequestDto){
         Doctor doctor;
         try{
             doctor = iDoctorService.saveDoctor(doctorRegistrationRequestDto);
@@ -58,7 +60,8 @@ public class DoctorController {
             return new ResponseDto<>(Collections.singletonList("Some Error Occurred"));
         }
         return new ResponseDto<>(
-                DoctorRegistrationRequestDto.builder()
+                DoctorRegistrationResponseDto.builder()
+                        .id(doctor.getId())
                         .firstName(doctor.getFirstName())
                         .middleName(doctor.getMiddleName())
                         .lastName(doctor.getLastName())
@@ -82,6 +85,18 @@ public class DoctorController {
             return new ResponseDto<>(Collections.singletonList("Some Error Occurred"));
         }
         return new ResponseDto<>(list);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = UriConstants.DELETE_DOCTOR)
+    private ResponseDto<String> deleteDoctor(@RequestParam(name = "email_address")String emailAddress){
+        try{
+            iDoctorService.deleteDoctor(emailAddress);
+            return new ResponseDto<>("Record Deleted Successfully");
+        }
+        catch (Exception e){
+            log.error("Error occurred :: " , e);
+            return new ResponseDto<>(Collections.singletonList("Some Error Occurred"));
+        }
     }
 
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
@@ -60,6 +61,7 @@ public class PatientController {
         }
         return new ResponseDto<>(
                 PatientRegistrationResponseDto.builder()
+                        .id(patient.getId())
                         .firstName(patient.getFirstName())
                         .middleName(patient.getMiddleName())
                         .lastName(patient.getLastName())
@@ -83,6 +85,18 @@ public class PatientController {
             return new ResponseDto<>(Collections.singletonList("Some Error Occurred"));
         }
         return new ResponseDto<>(list);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = UriConstants.DELETE_PATIENT)
+    private ResponseDto<String> deletePatient(@RequestParam(name = "email_address")String emailAddress){
+        try{
+            iPatientService.deletePatient(emailAddress);
+            return new ResponseDto<>("Record Deleted Successfully");
+        }
+        catch (Exception e){
+            log.error("Error occurred :: " , e);
+            return new ResponseDto<>(Collections.singletonList("Some Error Occurred"));
+        }
     }
 
 }
