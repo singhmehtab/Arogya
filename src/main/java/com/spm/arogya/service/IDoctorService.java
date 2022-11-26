@@ -10,6 +10,7 @@ import com.spm.arogya.model.Doctor;
 import com.spm.arogya.model.Patient;
 
 import javax.print.Doc;
+import java.util.List;
 
 /**
  * The interface Patient service.
@@ -26,4 +27,6 @@ public interface IDoctorService {
     Doctor saveDoctor(DoctorRegistrationRequestDto doctorRegistrationRequestDto) throws DoctorRegistrationException;
 
     LoginResponse getLoginDetails(String email, String password) throws LoginException;
+
+    List<Doctor> getDoctorsList();
 }

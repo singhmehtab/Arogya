@@ -6,6 +6,8 @@ import com.spm.arogya.exception.LoginException;
 import com.spm.arogya.exception.PatientRegistrationException;
 import com.spm.arogya.model.Patient;
 
+import java.util.List;
+
 /**
  * The interface Patient service.
  */
@@ -23,4 +25,6 @@ public interface IPatientService {
     LoginResponse getLoginDetails(String email, String password) throws LoginException;
 
     Patient findByEmailId(String emailId);
+
+    List<Patient> getPatientsList();
 }

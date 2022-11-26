@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.print.Doc;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -68,6 +69,7 @@ public class DoctorServiceImpl extends UserLogin implements IDoctorService {
             loginResponse.setLogged(false);
             return loginResponse;
         }
+        loginResponse.setId(doctor.getId());
         loginResponse.setLogged(true);
         loginResponse.setAge(doctor.getAge());
         loginResponse.setGender(doctor.getGender());
@@ -77,6 +79,11 @@ public class DoctorServiceImpl extends UserLogin implements IDoctorService {
         loginResponse.setPhoneNumber(doctor.getPhoneNumber());
         loginResponse.setEmailAddress(doctor.getEmailAddress());
         return loginResponse;
+    }
+
+    @Override
+    public List<Doctor> getDoctorsList() {
+        return doctorRepository.findAll();
     }
 
 

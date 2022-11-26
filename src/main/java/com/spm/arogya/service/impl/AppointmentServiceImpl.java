@@ -84,18 +84,19 @@ public class AppointmentServiceImpl implements IAppointmentService {
     @Override
     public AppointmentUpdateResponse modifyAppointment(AppointmentUpdateRequest appointmentUpdateRequest) throws RuntimeException{
         AppointmentUpdateResponse appointmentUpdateResponse=new AppointmentUpdateResponse();
-        int appointmentId = appointmentUpdateRequest.getAppointmentId();
-        int status = appointmentUpdateRequest.getStatus();
+        Integer appointmentId = appointmentUpdateRequest.getAppointmentId();
+        Integer status = appointmentUpdateRequest.getStatus();
         String counsellorId = appointmentUpdateRequest.getCounsellor_id();
         String doctorId = appointmentUpdateRequest.getDoctorId();
         Appointment appointment = appointmentRepository.findFirstById(appointmentId);
-        appointment.setStatus(status);
+        if(Objects.nonNull(status))appointment.setStatus(status);
         if(counsellorId!=null && !counsellorId.isEmpty()){
             appointment.setCounsellorRegistrationNumber(counsellorId);
-            appointment.setDoctorRegistrationNumber(doctorId);
-        }else if(doctorId!=null && !doctorId.isEmpty()){
-            //write business logic
         }
+        if(doctorId!=null && !doctorId.isEmpty()){
+            appointment.setDoctorRegistrationNumber(doctorId);
+        }
+        appointmentRepository.save(appointment);
         return appointmentUpdateResponse;
     }
 

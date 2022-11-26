@@ -7,6 +7,8 @@ import com.spm.arogya.exception.CounselorHomepageException;
 import com.spm.arogya.exception.CounselorRegistrationException;
 import com.spm.arogya.model.Counselor;
 
+import java.util.List;
+
 /**
  * The interface Counselor service.
  */
@@ -22,4 +24,6 @@ public interface ICounselorService {
     Counselor saveCounselor(CounselorRegistrationRequestDto counselorRegistrationRequestDto) throws CounselorRegistrationException;
 
     CounselorHomepageResponseDto getHomePage(String counsellorId) throws CounselorHomepageException;
+
+    List<Counselor> getCounselorsList();
 }

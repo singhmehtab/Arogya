@@ -9,12 +9,14 @@ import com.spm.arogya.dto.ResponseDto;
 import com.spm.arogya.exception.CounselorHomepageException;
 import com.spm.arogya.exception.CounselorRegistrationException;
 import com.spm.arogya.model.Counselor;
+import com.spm.arogya.model.Doctor;
 import com.spm.arogya.service.ICounselorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.List;
 
 /**
  * The type Counselor controller.
@@ -82,6 +84,20 @@ public class CounselorController {
             log.error("Error occurred ::", e );
             return new ResponseDto<>(Collections.singletonList("Some Error Occurred"));
         }
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = UriConstants.GET_COUNSELOR_LIST)
+    public ResponseDto<List<Counselor>> getCounselor(){
+
+        List<Counselor> list;
+        try{
+            list = iCounselorService.getCounselorsList();
+        }
+        catch (Exception e){
+            log.error("Error occurred :: " , e);
+            return new ResponseDto<>(Collections.singletonList("Some Error Occurred"));
+        }
+        return new ResponseDto<>(list);
     }
 
 }

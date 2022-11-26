@@ -54,9 +54,10 @@ public class AppointmentController {
     }
     @CrossOrigin
     @RequestMapping(method = RequestMethod.PUT, value = UriConstants.MODIFY_APPOINTMENT)
-    public ResponseDto<AppointmentUpdateResponse> modifyAppointment(@RequestBody AppointmentUpdateRequest appointmentUpdateRequest){
+    public ResponseDto<String> modifyAppointment(@RequestBody AppointmentUpdateRequest appointmentUpdateRequest){
         try {
-            return new ResponseDto<>(iAppointmentService.modifyAppointment(appointmentUpdateRequest));
+            AppointmentUpdateResponse appointmentUpdateResponse = iAppointmentService.modifyAppointment(appointmentUpdateRequest);
+            return new ResponseDto<>(appointmentUpdateResponse.getMessage());
         }
         catch (Exception e){
             log.error("Modify Appointment failed for :" + appointmentUpdateRequest.toString());

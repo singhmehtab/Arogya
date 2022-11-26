@@ -11,6 +11,7 @@ import com.spm.arogya.service.IPatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -62,6 +63,7 @@ public class PatientServiceImpl extends  UserLogin implements IPatientService {
             loginResponse.setLogged(false);
             return loginResponse;
         }
+        loginResponse.setId(patient.getId());
         loginResponse.setLogged(true);
         loginResponse.setAge(patient.getAge());
         loginResponse.setGender(patient.getGender());
@@ -76,6 +78,11 @@ public class PatientServiceImpl extends  UserLogin implements IPatientService {
     @Override
     public Patient findByEmailId(String emailId) {
         return patientRepository.findFirstByEmailAddress(emailId);
+    }
+
+    @Override
+    public List<Patient> getPatientsList() {
+        return patientRepository.findAll();
     }
 
 

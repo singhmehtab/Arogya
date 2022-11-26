@@ -89,6 +89,12 @@ public class CounselorServiceImpl   extends UserLogin implements ICounselorServi
 
 
     }
+
+    @Override
+    public List<Counselor> getCounselorsList() {
+        return counselorRepository.findAll();
+    }
+
     private GetAppointmentResponseDto transformAppointmentToAppointmentResponseDto(List<Appointment> ls){
         List<GetAppointmentResponseDto.AppointmentDetails> transformedLs=new ArrayList<>();
         ls.forEach(appointment -> {
@@ -112,6 +118,7 @@ public class CounselorServiceImpl   extends UserLogin implements ICounselorServi
             loginResponse.setLogged(false);
             return loginResponse;
         }
+        loginResponse.setId(counselor.getId());
         loginResponse.setLogged(true);
         loginResponse.setAge(counselor.getAge());
         loginResponse.setGender(counselor.getGender());

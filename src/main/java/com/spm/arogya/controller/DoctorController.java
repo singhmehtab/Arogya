@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.print.Doc;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * The type Patient controller.
@@ -66,6 +68,20 @@ public class DoctorController {
                         .gender(doctor.getGender().getGenderDisplay())
                         .build()
         );
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = UriConstants.GET_DOCTOR_LIST)
+    public ResponseDto<List<Doctor>> getDoctors(){
+
+        List<Doctor> list;
+        try{
+            list = iDoctorService.getDoctorsList();
+        }
+        catch (Exception e){
+            log.error("Error occurred :: " , e);
+            return new ResponseDto<>(Collections.singletonList("Some Error Occurred"));
+        }
+        return new ResponseDto<>(list);
     }
 
 }
