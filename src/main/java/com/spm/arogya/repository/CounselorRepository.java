@@ -33,4 +33,7 @@ public interface CounselorRepository extends JpaRepository<Counselor, Integer> {
 
     List<Counselor> findAll();
 
+    void deleteAllByEmailAddress(String emailAddress);
+
+
 }

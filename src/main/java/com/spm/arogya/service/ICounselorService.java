@@ -26,4 +26,6 @@ public interface ICounselorService {
     CounselorHomepageResponseDto getHomePage(String counsellorId) throws CounselorHomepageException;
 
     List<Counselor> getCounselorsList();
+
+    void deleteCounselor(String emailAddress);
 }

@@ -29,4 +29,6 @@ public interface IDoctorService {
     LoginResponse getLoginDetails(String email, String password) throws LoginException;
 
     List<Doctor> getDoctorsList();
+
+    void deleteDoctor(String emailAddress);
 }

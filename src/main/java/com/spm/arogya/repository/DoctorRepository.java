@@ -34,4 +34,6 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
 
     List<Doctor> findAll();
 
+    void deleteAllByEmailAddress(String emailAddress);
+
 }

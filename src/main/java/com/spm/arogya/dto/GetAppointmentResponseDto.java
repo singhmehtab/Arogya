@@ -26,6 +26,9 @@ public class GetAppointmentResponseDto {
     @NoArgsConstructor
     public static class AppointmentDetails {
 
+        @JsonProperty("appointment_id")
+        private Integer appointmentId;
+
         @JsonProperty("appointment_start_time")
         private Date appointmentStartTime;
 

@@ -5,6 +5,8 @@ import com.spm.arogya.model.Counselor;
 import com.spm.arogya.model.Patient;
 import com.spm.arogya.model.enums.Gender;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -18,4 +20,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
     List<Appointment> findByStatusAndCounsellorRegistrationNumber(int status, String counsellorId);
     List<Appointment> findAllByStatus(Integer status);
     Appointment findFirstById(int id);
+    void deleteAppointmentByPatient(Patient patient);
+    List<Appointment> findAllByCounsellorRegistrationNumber(String counselorId);
+
+    List<Appointment> findAllByDoctorRegistrationNumber(String doctorId);
 }

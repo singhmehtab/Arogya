@@ -16,9 +16,11 @@ import com.spm.arogya.repository.CounselorRepository;
 import com.spm.arogya.service.IAppointmentService;
 import com.spm.arogya.service.ICounselorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -93,6 +95,16 @@ public class CounselorServiceImpl   extends UserLogin implements ICounselorServi
     @Override
     public List<Counselor> getCounselorsList() {
         return counselorRepository.findAll();
+    }
+
+    @Override
+    @Transactional
+    public void deleteCounselor(String emailAddress) {
+        Counselor counselor = counselorRepository.findFirstByEmailAddress(emailAddress);
+        counselorRepository.deleteAllByEmailAddress(emailAddress);
+        List<Appointment> appointmentList = appointmentRepository.findAllByCounsellorRegistrationNumber(counselor.getId().toString());
+        appointmentList.forEach(appointment -> {appointment.setCounsellorRegistrationNumber(null);appointment.setStatus(0);});
+        appointmentRepository.saveAll(appointmentList);
     }
 
     private GetAppointmentResponseDto transformAppointmentToAppointmentResponseDto(List<Appointment> ls){

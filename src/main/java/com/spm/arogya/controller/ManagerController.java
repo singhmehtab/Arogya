@@ -58,6 +58,7 @@ public class ManagerController {
         }
         return new ResponseDto<>(
                 ManagerRegistrationResponseDto.builder()
+                        .id(manager.getId())
                         .firstName(manager.getFirstName())
                         .middleName(manager.getMiddleName())
                         .lastName(manager.getLastName())
