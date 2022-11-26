@@ -55,7 +55,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
     public GetAppointmentResponseDto getAppointments(String emailAddress) throws AppointmentRegistrationException {
         List<Appointment> appointmentList = null;
         if(Objects.isNull(emailAddress) || emailAddress.isEmpty()){
-            appointmentList = appointmentRepository.findAllByStatus(0);
+            appointmentList = appointmentRepository.findAll();
         }
         else {
             Patient patient = patientService.findByEmailId(emailAddress);
