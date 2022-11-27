@@ -94,6 +94,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
                     .userName(username)
                     .status(getStatus(appointment))
                     .rejected(appointment.getStatus() == 1 || appointment.getStatus() == 5)
+                    .appointmentCreationDate(appointment.getCreatedAt())
                     .build();
             appointmentDetails.add(details);
         });

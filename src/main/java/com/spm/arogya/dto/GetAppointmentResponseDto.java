@@ -61,6 +61,9 @@ public class GetAppointmentResponseDto {
 
         @JsonProperty("status")
         private String status;
+
+        @JsonProperty("appointment_creation_date")
+        private Date appointmentCreationDate;
     }
 
 }
