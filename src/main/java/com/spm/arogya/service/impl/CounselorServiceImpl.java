@@ -114,8 +114,8 @@ public class CounselorServiceImpl   extends UserLogin implements ICounselorServi
             GetAppointmentResponseDto.AppointmentDetails details = GetAppointmentResponseDto.AppointmentDetails.builder()
                     .appointmentStartTime(appointment.getAppointmentStartTime())
                     .appointmentEndTime(appointment.getAppointmentEndTime())
-                    .counsellorRegistrationNumber(appointment.getCounsellorRegistrationNumber())
-                    .doctorRegistrationNumber(appointment.getDoctorRegistrationNumber())
+                    .counsellorRegistrationNumber(Objects.nonNull(appointment.getCounsellorRegistrationNumber())? Integer.parseInt(appointment.getCounsellorRegistrationNumber()) : null)
+                    .doctorRegistrationNumber(Objects.nonNull(appointment.getDoctorRegistrationNumber())? Integer.parseInt(appointment.getDoctorRegistrationNumber()) : null)
                     .patient(appointment.getPatient())
                     .questions(appointment.getQuestions())
                     .selfAssessment(true).build();

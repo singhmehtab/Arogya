@@ -39,10 +39,10 @@ public class GetAppointmentResponseDto {
         private Questions questions;
 
         @JsonProperty("counsellor_id")
-        private String counsellorRegistrationNumber;
+        private Integer counsellorRegistrationNumber;
 
         @JsonProperty("doctor_id")
-        private String doctorRegistrationNumber;
+        private Integer doctorRegistrationNumber;
 
         @JsonProperty("patient")
         private Patient patient;

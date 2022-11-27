@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.Date;
+
 @Builder
 @Getter
 @AllArgsConstructor
@@ -22,4 +24,6 @@ public class AppointmentUpdateRequest {
     private String counsellor_id;
     @JsonProperty("doctor_id")
     private String doctorId;
+    @JsonProperty("appointment_start_time")
+    private Date appointmentStartTime;
 }

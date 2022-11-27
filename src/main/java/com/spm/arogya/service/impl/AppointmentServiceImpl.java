@@ -67,8 +67,8 @@ public class AppointmentServiceImpl implements IAppointmentService {
                     .appointmentId(appointment.getId())
                     .appointmentStartTime(appointment.getAppointmentStartTime())
                     .appointmentEndTime(appointment.getAppointmentEndTime())
-                    .counsellorRegistrationNumber(appointment.getCounsellorRegistrationNumber())
-                    .doctorRegistrationNumber(appointment.getDoctorRegistrationNumber())
+                    .counsellorRegistrationNumber(Objects.nonNull(appointment.getCounsellorRegistrationNumber())? Integer.parseInt(appointment.getCounsellorRegistrationNumber()) : null)
+                    .doctorRegistrationNumber(Objects.nonNull(appointment.getDoctorRegistrationNumber())? Integer.parseInt(appointment.getCounsellorRegistrationNumber()) : null)
                     .patient(appointment.getPatient())
                     .questions(appointment.getQuestions())
                     .selfAssessment(true).build();
@@ -98,6 +98,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
             appointment.setDoctorRegistrationNumber(doctorId);
             appointment.setStatus(4);
         }
+        if(Objects.nonNull(appointmentUpdateRequest.getAppointmentStartTime())) appointment.setAppointmentStartTime(appointmentUpdateRequest.getAppointmentStartTime());
         if(Objects.nonNull(status))appointment.setStatus(status);
         appointmentRepository.save(appointment);
         return appointmentUpdateResponse;
