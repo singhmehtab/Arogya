@@ -107,6 +107,11 @@ public class CounselorServiceImpl   extends UserLogin implements ICounselorServi
         appointmentRepository.saveAll(appointmentList);
     }
 
+    @Override
+    public Counselor findById(Integer id) {
+        return counselorRepository.findFirstById(id);
+    }
+
     private GetAppointmentResponseDto transformAppointmentToAppointmentResponseDto(List<Appointment> ls){
         List<GetAppointmentResponseDto.AppointmentDetails> transformedLs=new ArrayList<>();
         ls.forEach(appointment -> {

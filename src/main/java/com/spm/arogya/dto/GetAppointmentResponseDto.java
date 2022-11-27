@@ -49,6 +49,18 @@ public class GetAppointmentResponseDto {
 
         @JsonProperty("self_assessment")
         private boolean selfAssessment;
+
+        @JsonProperty("user_type")
+        private String userType;
+
+        @JsonProperty("username")
+        private String userName;
+
+        @JsonProperty("rejected")
+        private boolean rejected;
+
+        @JsonProperty("status")
+        private String status;
     }
 
 }

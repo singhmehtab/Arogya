@@ -101,5 +101,10 @@ public class DoctorServiceImpl extends UserLogin implements IDoctorService {
         appointmentRepository.saveAll(appointmentList);
     }
 
+    @Override
+    public Doctor findById(Integer id) {
+        return doctorRepository.findFirstById(id);
+    }
+
 
 }
