@@ -68,7 +68,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
                     .appointmentStartTime(appointment.getAppointmentStartTime())
                     .appointmentEndTime(appointment.getAppointmentEndTime())
                     .counsellorRegistrationNumber(Objects.nonNull(appointment.getCounsellorRegistrationNumber())? Integer.parseInt(appointment.getCounsellorRegistrationNumber()) : null)
-                    .doctorRegistrationNumber(Objects.nonNull(appointment.getDoctorRegistrationNumber())? Integer.parseInt(appointment.getCounsellorRegistrationNumber()) : null)
+                    .doctorRegistrationNumber(Objects.nonNull(appointment.getDoctorRegistrationNumber())? Integer.parseInt(appointment.getDoctorRegistrationNumber()) : null)
                     .patient(appointment.getPatient())
                     .questions(appointment.getQuestions())
                     .selfAssessment(true).build();
