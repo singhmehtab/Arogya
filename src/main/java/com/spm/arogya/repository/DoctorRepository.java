@@ -3,9 +3,9 @@ package com.spm.arogya.repository;
 import com.spm.arogya.model.Counselor;
 import com.spm.arogya.model.Doctor;
 import com.spm.arogya.model.enums.Gender;
+import com.sun.javadoc.Doc;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import javax.print.Doc;
 import java.util.List;
 
 /**
@@ -35,5 +35,7 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
     List<Doctor> findAll();
 
     void deleteAllByEmailAddress(String emailAddress);
+
+    Doctor findFirstById(Integer id);
 
 }

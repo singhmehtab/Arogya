@@ -28,4 +28,6 @@ public interface ICounselorService {
     List<Counselor> getCounselorsList();
 
     void deleteCounselor(String emailAddress);
+
+    Counselor findById(Integer id);
 }

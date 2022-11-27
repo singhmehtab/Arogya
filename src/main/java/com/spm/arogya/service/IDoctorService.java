@@ -31,4 +31,6 @@ public interface IDoctorService {
     List<Doctor> getDoctorsList();
 
     void deleteDoctor(String emailAddress);
+
+    Doctor findById(Integer id);
 }
