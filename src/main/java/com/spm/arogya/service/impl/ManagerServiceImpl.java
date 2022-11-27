@@ -2,11 +2,14 @@ package com.spm.arogya.service.impl;
 
 import com.spm.arogya.dto.LoginResponse;
 import com.spm.arogya.dto.ManagerRegistrationRequestDto;
+import com.spm.arogya.dto.ManagerReport;
+import com.spm.arogya.dto.UsersCount;
 import com.spm.arogya.exception.LoginException;
 import com.spm.arogya.exception.ManagerRegistrationException;
 import com.spm.arogya.model.Manager;
+import com.spm.arogya.model.enums.AppointmentStatus;
 import com.spm.arogya.model.enums.Gender;
-import com.spm.arogya.repository.ManagerRepository;
+import com.spm.arogya.repository.*;
 import com.spm.arogya.service.IManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,15 +23,22 @@ import java.util.Objects;
 public class ManagerServiceImpl extends  UserLogin implements IManagerService {
 
     private ManagerRepository managerRepository;
-
+    private PatientRepository patientRepository;
+    private CounselorRepository counselorRepository;
+    private DoctorRepository doctorRepository;
+    private AppointmentRepository appointmentRepository;
     /**
      * Instantiates a new Patient service.
      *
      * @param managerRepository the patient repository
      */
     @Autowired
-    public ManagerServiceImpl(ManagerRepository managerRepository){
+    public ManagerServiceImpl(ManagerRepository managerRepository,PatientRepository patientRepository,CounselorRepository counselorRepository,DoctorRepository doctorRepository, AppointmentRepository appointmentRepository){
         this.managerRepository = managerRepository;
+        this.patientRepository=patientRepository;
+        this.counselorRepository=counselorRepository;
+        this.doctorRepository=doctorRepository;
+        this.appointmentRepository=appointmentRepository;
     }
 
     @Override
@@ -68,6 +78,25 @@ public class ManagerServiceImpl extends  UserLogin implements IManagerService {
         loginResponse.setPhoneNumber(manager.getPhoneNumber());
         loginResponse.setEmailAddress(manager.getEmailAddress());
         return loginResponse;
+    }
+
+    @Override
+    public ManagerReport getManagerReport() {
+        int counsellorCount=counselorRepository.findAll().size();
+        int patientCount=patientRepository.findAll().size();
+        int doctorCount=doctorRepository.findAll().size();
+        UsersCount usersCount=UsersCount.builder()
+                .counsellorCount(counsellorCount)
+                .doctorCount(doctorCount)
+                .patientCount(patientCount)
+                .build();
+        int selfAssessmentFilled=appointmentRepository.findAllByStatus(AppointmentStatus.APPOINTMENT_BORN.getStatus()).size();
+        int patientWithDoctorAssigned=appointmentRepository.findAllByStatus(AppointmentStatus.SCHEDULED_WITH_DOCTOR.getStatus()).size();
+        return ManagerReport.builder()
+                .selfAssessmentFilled(selfAssessmentFilled)
+                .patientWithDoctorAssignedAssigned(patientWithDoctorAssigned)
+                .usersCount(usersCount)
+                .build();
     }
 
 

@@ -1,9 +1,7 @@
 package com.spm.arogya.controller;
 
 import com.spm.arogya.constants.UriConstants;
-import com.spm.arogya.dto.ManagerRegistrationRequestDto;
-import com.spm.arogya.dto.ManagerRegistrationResponseDto;
-import com.spm.arogya.dto.ResponseDto;
+import com.spm.arogya.dto.*;
 import com.spm.arogya.exception.ManagerRegistrationException;
 import com.spm.arogya.model.Manager;
 import com.spm.arogya.service.IManagerService;
@@ -70,4 +68,14 @@ public class ManagerController {
         );
     }
 
+    @RequestMapping(method=RequestMethod.GET, value = "report")
+    public ResponseDto<ManagerReport> getReport(){
+        try{
+            ManagerReport managerReport=iManagerService.getManagerReport();
+            return new ResponseDto<>(managerReport);
+        }catch (Exception ex){
+            log.error("Error occurred ::", ex );
+            return new ResponseDto<>(Collections.singletonList("Some Error Occurred"));
+        }
+    }
 }
