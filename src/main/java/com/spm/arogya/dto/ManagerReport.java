@@ -13,6 +13,8 @@ public class ManagerReport {
     private int selfAssessmentFilled;
     @JsonProperty("patient_with_doctor_assigned")
     private int patientWithDoctorAssignedAssigned;
+    @JsonProperty("patient_with_counsellor_assigned")
+    private int patientWithCounsellorAssignedAssigned;
     @JsonProperty("users_count")
     private UsersCount usersCount;
 }

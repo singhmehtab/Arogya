@@ -92,9 +92,11 @@ public class ManagerServiceImpl extends  UserLogin implements IManagerService {
                 .build();
         int selfAssessmentFilled=appointmentRepository.findAllByStatus(AppointmentStatus.APPOINTMENT_BORN.getStatus()).size();
         int patientWithDoctorAssigned=appointmentRepository.findAllByStatus(AppointmentStatus.SCHEDULED_WITH_DOCTOR.getStatus()).size();
+        int patientWithCounsellorAssigned=appointmentRepository.findByStatus(AppointmentStatus.SCHEDULED_WITH_COUNSELLOR.getStatus()).size();
         return ManagerReport.builder()
                 .selfAssessmentFilled(selfAssessmentFilled)
                 .patientWithDoctorAssignedAssigned(patientWithDoctorAssigned)
+                .patientWithCounsellorAssignedAssigned(patientWithCounsellorAssigned)
                 .usersCount(usersCount)
                 .build();
     }
