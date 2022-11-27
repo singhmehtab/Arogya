@@ -19,7 +19,7 @@ import java.util.Collections;
 public class HomepageController {
     @Autowired
     IHomepageService iHomepageService;
-    @RequestMapping(method=RequestMethod.GET, value = "/count")
+    @RequestMapping(method=RequestMethod.GET, value = "/users/count")
     public ResponseDto<UsersCount> getUsersCount(){
         try{
             UsersCount usersCount=iHomepageService.getUserCount();
