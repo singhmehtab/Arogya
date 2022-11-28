@@ -138,7 +138,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
         //status 4 -> accepted by doctor
         //status 5 -> rejected by doctor
         String status = "";
-        if(appointment.getStatus() == 1) status = "Rejected By Doctor";
+        if(appointment.getStatus() == 1) status = "Rejected By Counselor";
         else if(appointment.getStatus() == 5) status = "Rejected By Doctor";
         else if(Objects.isNull(appointment.getCounsellorRegistrationNumber()) && Objects.isNull(appointment.getDoctorRegistrationNumber())) status = "Appointment In Review";
         else if(Objects.nonNull(appointment.getDoctorRegistrationNumber()) && Objects.isNull(appointment.getAppointmentStartTime())) status = "Forwarded to doctor";
