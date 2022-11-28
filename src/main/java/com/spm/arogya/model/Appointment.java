@@ -46,7 +46,7 @@ public class Appointment extends BaseModel{
     //status 4 -> accepted by doctor
     //status 5 -> rejected by doctor
     @Column(name = "status")
-    private int status;
+    private Integer status;
 
     @JsonIgnore
     @JoinColumn(name = "patient_id", nullable = false)

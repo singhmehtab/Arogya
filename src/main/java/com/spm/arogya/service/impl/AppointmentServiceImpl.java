@@ -120,7 +120,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
         else if(doctorId!=null && !doctorId.isEmpty()){
             appointment.setDoctorRegistrationNumber(doctorId);
         }
-        appointment.setStatus(status);
+        if(Objects.nonNull(status))appointment.setStatus(status);
         appointment.setAppointmentStartTime(appointmentUpdateRequest.getAppointmentStartTime());
         appointmentRepository.save(appointment);
         return appointmentUpdateResponse;
