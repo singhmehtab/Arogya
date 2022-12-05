@@ -103,7 +103,7 @@ public class CounselorServiceImpl   extends UserLogin implements ICounselorServi
         Counselor counselor = counselorRepository.findFirstByEmailAddress(emailAddress);
         counselorRepository.deleteAllByEmailAddress(emailAddress);
         List<Appointment> appointmentList = appointmentRepository.findAllByCounsellorRegistrationNumber(counselor.getId().toString());
-        appointmentList.forEach(appointment -> {appointment.setCounsellorRegistrationNumber(null);appointment.setStatus(0);});
+        appointmentList.forEach(appointment -> {appointment.setCounsellorRegistrationNumber(null);appointment.setStatus(0);appointment.setAppointmentStartTime(null);});
         appointmentRepository.saveAll(appointmentList);
     }
 

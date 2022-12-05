@@ -97,7 +97,7 @@ public class DoctorServiceImpl extends UserLogin implements IDoctorService {
         Doctor doctor = doctorRepository.findFirstByEmailAddress(emailAddress);
         doctorRepository.deleteAllByEmailAddress(emailAddress);
         List<Appointment> appointmentList = appointmentRepository.findAllByDoctorRegistrationNumber(doctor.getId().toString());
-        appointmentList.forEach(appointment -> {appointment.setDoctorRegistrationNumber(null);appointment.setStatus(0);});
+        appointmentList.forEach(appointment -> {appointment.setDoctorRegistrationNumber(null);appointment.setStatus(0);appointment.setAppointmentStartTime(null);appointment.setCounsellorRegistrationNumber(null);});
         appointmentRepository.saveAll(appointmentList);
     }
 
